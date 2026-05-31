@@ -1,0 +1,2843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%236366f1'/%3E%3Ctext x='32' y='46' font-size='38' text-anchor='middle' fill='white'%3E%E2%AC%A1%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%236366f1'/%3E%3Ctext x='32' y='46' font-size='38' text-anchor='middle' fill='white'%3E%E2%AC%A1%3C/text%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="description" content="Nexus Wallet — A native Android DeFi wallet supporting Ethereum, Polygon, Arbitrum, Optimism, Base, BSC, Avalanche & zkSync. AES-256-GCM encrypted. Download the APK.">
+<meta name="keywords" content="Nexus Wallet, DeFi wallet, Android wallet, crypto wallet, Ethereum wallet, multi-chain wallet, APK download">
+<meta name="theme-color" content="#0a0a0f">
+<meta property="og:title" content="Nexus Wallet — Multi-Chain DeFi Wallet for Android">
+<meta property="og:description" content="Secure, self-custody DeFi wallet. AES-256-GCM encrypted. Free APK download.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nexuswallet.online/">
+<!-- og:image: replace with a real hosted image URL before deploying -->
+<meta property="og:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'%3E%3Crect width='1200' height='630' fill='%230a0a0f'/%3E%3Crect x='60' y='60' width='1080' height='510' rx='32' fill='%230f0f18' stroke='%23232338' stroke-width='2'/%3E%3Ccircle cx='300' cy='315' r='200' fill='%236366f1' opacity='0.15'/%3E%3Ccircle cx='900' cy='200' r='150' fill='%238b5cf6' opacity='0.1'/%3E%3Crect x='120' y='220' width='56' height='56' rx='16' fill='%236366f1'/%3E%3Ctext x='148' y='257' font-family='Arial' font-size='28' text-anchor='middle' fill='white'%3E%E2%AC%A1%3C/text%3E%3Ctext x='195' y='262' font-family='Arial Black,Arial' font-size='42' font-weight='900' fill='%23f1f1f5'%3ENexus Wallet%3C/text%3E%3Ctext x='120' y='320' font-family='Arial' font-size='24' fill='%23a1a1b5'%3EMulti-Chain DeFi Wallet for Android%3C/text%3E%3Ctext x='120' y='370' font-family='Arial' font-size='18' fill='%235a5a75'%3EAES-256-GCM Encrypted %C2%B7 Self-Custody %C2%B7 Free APK%3C/text%3E%3C/svg%3E">
+<meta name="robots" content="index, follow">
+<!-- Security headers via meta — supplements server-level headers -->
+<!-- NOTE: script-src 'unsafe-inline' is required by the inline scripts in this single-file build.
+     For production, move scripts to external .js files and remove 'unsafe-inline' entirely. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://fonts.googleapis.com https://fonts.gstatic.com https://nexuswallet.online; img-src 'self' data:; frame-ancestors 'none'; base-uri 'self'; form-action 'none';">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<!-- Permissions-Policy: disable browser features this page never uses -->
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()">
+<title>Nexus Wallet — Multi-Chain DeFi Wallet for Android</title>
+
+<!-- PWA manifest — injected as a Blob URL to avoid Chrome 93+ data: URI block -->
+<script>
+(function() {
+  var manifest = {
+    name: 'Nexus Wallet',
+    short_name: 'Nexus',
+    start_url: './',
+    theme_color: '#0a0a0f',
+    background_color: '#0a0a0f',
+    display: 'standalone',
+    icons: [{
+      src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='40' fill='%236366f1'/%3E%3Ctext x='96' y='130' font-size='110' text-anchor='middle'%3E%E2%AC%A1%3C/text%3E%3C/svg%3E",
+      sizes: '192x192',
+      type: 'image/svg+xml'
+    }]
+  };
+  try {
+    var blob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var link = document.createElement('link');
+    link.rel = 'manifest';
+    link.href = url;
+    document.head.appendChild(link);
+    // Do NOT revoke — browser fetches the manifest asynchronously
+    // URL.revokeObjectURL(url); ← removed: was revoking before browser could read it
+  } catch (e) {}
+})();
+</script>
+
+
+<link rel="canonical" href="https://nexuswallet.online/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════
+   DESIGN SYSTEM — NEXUS WALLET
+   Aesthetic: Obsidian Precision — deep dark
+   surfaces, indigo-violet energy, mono accents
+═══════════════════════════════════════════ */
+
+:root {
+  --bg-void:       #05050a;
+  --bg-base:       #0a0a0f;
+  --bg-surface:    #0f0f18;
+  --bg-raised:     #14141f;
+  --bg-glass:      rgba(255,255,255,0.035);
+  --bg-glass-md:   rgba(255,255,255,0.06);
+  --bg-glass-hi:   rgba(255,255,255,0.09);
+
+  --accent-indigo: #6366f1;
+  --accent-violet: #8b5cf6;
+  --accent-cyan:   #22d3ee;
+  --accent-green:  #10b981;
+  --accent-amber:  #f59e0b;
+  --accent-rose:   #f43f5e;
+
+  --grad-primary:  linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  --grad-hero:     linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #2563eb 100%);
+  --grad-subtle:   linear-gradient(135deg, rgba(99,102,241,0.12) 0%, rgba(139,92,246,0.08) 100%);
+
+  --text-primary:  #f1f1f5;
+  --text-secondary:#a1a1b5;
+  --text-muted:    #5a5a75;
+  --text-faint:    #2e2e42;
+
+  --border-subtle: rgba(255,255,255,0.07);
+  --border-glass:  rgba(255,255,255,0.11);
+  --border-accent: rgba(99,102,241,0.35);
+
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  --radius-sm:    8px;
+  --radius-md:    14px;
+  --radius-lg:    20px;
+  --radius-xl:    28px;
+  --radius-pill:  999px;
+
+  --shadow-card:  0 4px 24px rgba(0,0,0,0.4), 0 1px 3px rgba(0,0,0,0.3);
+  --shadow-deep:  0 20px 60px rgba(0,0,0,0.6);
+
+  --section-pad:  100px 0;
+  --container-w:  1160px;
+  --nav-h:        64px;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+/* ── Skip to main content (screen readers / keyboard nav) ── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 9999;
+  padding: 10px 18px;
+  background: var(--accent-indigo);
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  text-decoration: none;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 0; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-base);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; font-family: inherit; border: none; background: none; }
+ul { list-style: none; }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-void); }
+::-webkit-scrollbar-thumb { background: var(--accent-indigo); border-radius: 99px; }
+
+/* ── Container ── */
+.container {
+  max-width: var(--container-w);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Selection ── */
+::selection { background: rgba(99,102,241,0.35); color: #fff; }
+
+/* ═══════════════════════════════════
+   NOISE TEXTURE OVERLAY
+═══════════════════════════════════ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.45;
+}
+
+/* ═══════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════ */
+#nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  z-index: 100;
+  transition: background 0.3s, border-color 0.3s, backdrop-filter 0.3s;
+}
+#nav.scrolled {
+  background: rgba(5,5,10,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.nav-inner {
+  max-width: var(--container-w);
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+.nav-logo-icon {
+  width: 34px;
+  height: 34px;
+  background: var(--grad-primary);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  box-shadow: 0 4px 12px rgba(99,102,241,0.4);
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-links a {
+  padding: 7px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color 0.2s, background 0.2s;
+}
+.nav-links a:hover {
+  color: var(--text-primary);
+  background: var(--bg-glass-md);
+}
+.nav-cta {
+  padding: 9px 18px !important;
+  background: var(--grad-primary) !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  border-radius: var(--radius-pill) !important;
+  box-shadow: 0 4px 16px rgba(99,102,241,0.4);
+  transition: box-shadow 0.2s, transform 0.15s !important;
+}
+.nav-cta:hover {
+  box-shadow: 0 6px 24px rgba(99,102,241,0.55) !important;
+  transform: translateY(-1px) !important;
+}
+.nav-mobile-btn {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-glass-md);
+}
+.nav-mobile-btn span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--text-secondary);
+  border-radius: 2px;
+  transition: all 0.25s;
+}
+
+/* Mobile nav drawer */
+.nav-drawer {
+  display: none;
+  position: fixed;
+  top: var(--nav-h);
+  left: 0; right: 0;
+  background: rgba(5,5,10,0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 16px 24px 24px;
+  z-index: 99;
+  flex-direction: column;
+  gap: 4px;
+}
+.nav-drawer.open { display: flex; }
+.nav-drawer a {
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color 0.2s, background 0.2s;
+}
+.nav-drawer a:hover { color: var(--text-primary); background: var(--bg-glass-md); }
+.nav-drawer .drawer-cta {
+  margin-top: 12px;
+  padding: 13px 16px !important;
+  background: var(--grad-primary) !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  text-align: center;
+  border-radius: var(--radius-md) !important;
+}
+
+/* ═══════════════════════════════════
+   HERO SECTION
+═══════════════════════════════════ */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 120px 0 80px;
+}
+
+/* Animated gradient orbs */
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  animation: orbFloat 8s ease-in-out infinite;
+}
+.hero-orb-1 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(99,102,241,0.22) 0%, transparent 70%);
+  top: -100px; left: -100px;
+  animation-delay: 0s;
+}
+.hero-orb-2 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(139,92,246,0.18) 0%, transparent 70%);
+  top: 100px; right: -80px;
+  animation-delay: -3s;
+}
+.hero-orb-3 {
+  width: 350px; height: 350px;
+  background: radial-gradient(circle, rgba(34,211,238,0.1) 0%, transparent 70%);
+  bottom: -50px; left: 40%;
+  animation-delay: -5s;
+}
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(20px, -30px) scale(1.05); }
+  66%       { transform: translate(-15px, 15px) scale(0.95); }
+}
+
+/* Grid overlay */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(99,102,241,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99,102,241,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 40%, transparent 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  max-width: 820px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(99,102,241,0.12);
+  border: 1px solid rgba(99,102,241,0.3);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: #a78bfa;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  animation: fadeSlideUp 0.6s ease both;
+}
+.hero-badge-dot {
+  width: 6px; height: 6px;
+  background: var(--accent-indigo);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent-indigo);
+  animation: pulse 2s ease infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.6; transform: scale(0.8); }
+}
+
+.hero-h1 {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5.5vw, 70px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -2px;
+  margin-bottom: 20px;
+  animation: fadeSlideUp 0.6s 0.1s ease both;
+}
+.hero-h1 .grad-text {
+  background: var(--grad-hero);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-desc {
+  font-size: clamp(15px, 1.8vw, 17px);
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 600px;
+  margin-bottom: 36px;
+  animation: fadeSlideUp 0.6s 0.2s ease both;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  animation: fadeSlideUp 0.6s 0.3s ease both;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 14px 26px;
+  background: var(--grad-primary);
+  color: #fff;
+  font-weight: 700;
+  font-size: 14.5px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 6px 24px rgba(99,102,241,0.45), 0 2px 8px rgba(0,0,0,0.3);
+  transition: box-shadow 0.2s, transform 0.15s;
+  white-space: nowrap;
+}
+.btn-primary:hover {
+  box-shadow: 0 10px 32px rgba(99,102,241,0.6), 0 4px 12px rgba(0,0,0,0.3);
+  transform: translateY(-2px);
+}
+.btn-primary:active { transform: translateY(0); }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 14px 26px;
+  background: var(--bg-glass-md);
+  border: 1px solid var(--border-glass);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 14.5px;
+  border-radius: var(--radius-pill);
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  white-space: nowrap;
+  backdrop-filter: blur(12px);
+}
+.btn-ghost:hover {
+  background: var(--bg-glass-hi);
+  border-color: var(--border-accent);
+  transform: translateY(-2px);
+}
+
+.btn-icon { font-size: 18px; }
+
+/* Hero meta tags */
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 32px;
+  animation: fadeSlideUp 0.6s 0.4s ease both;
+}
+.hero-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-muted);
+}
+.hero-tag .dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+}
+
+/* ── Hero Desktop Visual ── */
+.hero-desktop-visual {
+  display: none;
+  position: relative;
+  animation: fadeSlideUp 0.7s 0.35s ease both;
+}
+.hdv-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(99,102,241,0.1);
+  position: relative;
+  overflow: hidden;
+}
+.hdv-card::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+.hdv-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.hdv-balance-section { margin-bottom: 20px; }
+.hdv-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.hdv-action-btn {
+  padding: 10px 0;
+  background: var(--bg-raised);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.hdv-action-primary {
+  background: rgba(99,102,241,0.12);
+  border-color: rgba(99,102,241,0.3);
+  color: #a78bfa;
+}
+.hdv-tokens { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+.hdv-token-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+.hdv-sec-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(16,185,129,0.06);
+  border: 1px solid rgba(16,185,129,0.15);
+  border-radius: var(--radius-md);
+}
+.hdv-float {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  white-space: nowrap;
+}
+.hdv-float-1 { top: -18px; right: -24px; animation: floatCard1 5s ease-in-out infinite; }
+.hdv-float-2 { bottom: 60px; left: -28px; animation: floatCard2 5s 2.5s ease-in-out infinite; }
+
+@media (min-width: 1024px) {
+  .hero-desktop-visual { display: block; }
+  .hero-content {
+    display: grid;
+    grid-template-columns: 55fr 45fr;
+    align-items: center;
+    gap: 64px;
+    max-width: 100%;
+  }
+  .hero-desc { max-width: 100%; }
+}
+
+/* Hero phone mockup */
+.phone-glow {
+  position: absolute;
+  inset: -30px;
+  background: radial-gradient(ellipse at center, rgba(99,102,241,0.25) 0%, transparent 70%);
+  filter: blur(20px);
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+/* floatPhone keyframes removed — no element in this build uses animation: floatPhone */
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%       { opacity: 1; transform: scale(1.08); }
+}
+
+/* Simulated wallet UI inside phone */
+.phone-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.phone-chain-badge {
+  font-size: 7px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  padding: 3px 7px;
+  background: rgba(99,102,241,0.15);
+  border: 1px solid rgba(99,102,241,0.3);
+  color: #a78bfa;
+  border-radius: 6px;
+}
+.phone-balance-amount {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+.phone-action-row {
+  display: flex;
+  gap: 6px;
+}
+.phone-action-icon { font-size: 14px; }
+.phone-token-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+}
+.phone-token-info { flex: 1; min-width: 0; }
+.phone-token-name { font-size: 7.5px; color: var(--text-muted); font-family: var(--font-mono); }
+/* Floating badges beside phone */
+.hero-float-card {
+  position: absolute;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-card);
+  white-space: nowrap;
+}
+.hero-float-1 {
+  right: -20px;
+  top: 80px;
+  animation: floatCard1 5s ease-in-out infinite;
+}
+.hero-float-2 {
+  left: -30px;
+  bottom: 120px;
+  animation: floatCard2 6s ease-in-out infinite;
+}
+@keyframes floatCard1 {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+@keyframes floatCard2 {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(8px); }
+}
+.float-label { font-size: 9px; color: var(--text-muted); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
+.float-value { font-size: 13px; font-weight: 700; font-family: var(--font-display); color: var(--text-primary); }
+.float-sub { font-size: 9px; font-family: var(--font-mono); margin-top: 2px; }
+
+/* ═══════════════════════════════════
+   SECTION BASE
+═══════════════════════════════════ */
+section { padding: var(--section-pad); position: relative; }
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--accent-indigo);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 14px;
+}
+.section-tag::before {
+  content: '';
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--accent-indigo);
+  border-radius: 2px;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+.section-desc {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 580px;
+}
+
+/* Gradient divider */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-glass), transparent);
+  margin: 0;
+}
+
+/* ═══════════════════════════════════
+   CHAIN TICKER (animated marquee)
+═══════════════════════════════════ */
+#chain-ticker {
+  padding: 0;
+  overflow: hidden;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+}
+.ticker-track {
+  display: flex;
+  will-change: transform;
+}
+.ticker-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  white-space: nowrap;
+  border-right: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+.ticker-emoji { font-size: 16px; }
+.ticker-name {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.ticker-id {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  color: var(--text-faint);
+}
+
+/* ═══════════════════════════════════
+   ABOUT SECTION
+═══════════════════════════════════ */
+#about { background: var(--bg-void); }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  max-width: 720px;
+}
+.about-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 40px;
+}
+.benefit-item {
+  display: flex;
+  gap: 14px;
+  padding: 18px 20px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
+}
+.benefit-item:hover {
+  border-color: var(--border-accent);
+  background: var(--bg-glass-md);
+  transform: translateX(4px);
+}
+.benefit-icon {
+  width: 40px; height: 40px;
+  background: rgba(99,102,241,0.12);
+  border: 1px solid rgba(99,102,241,0.2);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.benefit-title { font-weight: 700; font-size: 14px; margin-bottom: 3px; }
+.benefit-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+
+/* About visual — chain grid */
+.about-visual { display: none; }
+@media (min-width: 901px) {
+  .about-visual { display: block; }
+}
+.about-visual-inner {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  box-shadow: var(--shadow-card);
+}
+.about-chain-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.about-chain-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 10px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  text-align: center;
+  transition: border-color 0.2s, transform 0.2s;
+  cursor: default;
+}
+.about-chain-item:hover {
+  border-color: var(--border-accent);
+  transform: translateY(-2px);
+}
+.about-chain-custom {
+  background: rgba(99,102,241,0.06);
+  border-color: rgba(99,102,241,0.2);
+  color: var(--accent-indigo);
+}
+.about-chain-name {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.about-chain-id {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-muted);
+}
+
+/* ═══════════════════════════════════
+   FEATURES SECTION
+═══════════════════════════════════ */
+#features { background: var(--bg-base); }
+
+.features-header { text-align: center; margin-bottom: 60px; }
+.features-header .section-tag { justify-content: center; }
+.features-header .section-desc { margin: 0 auto; }
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.feature-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+.feature-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--grad-subtle);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.feature-card:hover {
+  border-color: var(--border-accent);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(99,102,241,0.15);
+}
+.feature-card:hover::before { opacity: 1; }
+.feature-card:hover .feature-icon-wrap { box-shadow: 0 6px 24px rgba(99,102,241,0.35); }
+
+.feature-icon-wrap {
+  position: relative;
+  width: 48px; height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 18px;
+  transition: box-shadow 0.25s;
+}
+.feature-card-title {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  position: relative;
+}
+.feature-card-desc {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  position: relative;
+}
+.feature-chip {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 3px 10px;
+  background: rgba(99,102,241,0.1);
+  border: 1px solid rgba(99,102,241,0.2);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  color: #a78bfa;
+  position: relative;
+}
+
+/* Feature card accent colors */
+.fc-indigo .feature-icon-wrap { background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.25); }
+.fc-violet .feature-icon-wrap { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.25); }
+.fc-cyan   .feature-icon-wrap { background: rgba(34,211,238,0.12); border: 1px solid rgba(34,211,238,0.2); }
+.fc-green  .feature-icon-wrap { background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.2); }
+.fc-amber  .feature-icon-wrap { background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.2); }
+.fc-rose   .feature-icon-wrap { background: rgba(244,63,94,0.12); border: 1px solid rgba(244,63,94,0.2); }
+
+/* Larger feature card */
+.feature-card.fc-large {
+  grid-column: span 2;
+}
+.fc-large .feature-card-desc { max-width: 480px; }
+
+/* ═══════════════════════════════════
+   SECURITY SECTION
+═══════════════════════════════════ */
+#security { background: var(--bg-void); }
+
+.security-header-centered {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 0;
+}
+
+.security-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  align-items: start;
+  margin-top: 48px;
+}
+
+.security-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.sec-layer {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 20px 22px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.sec-layer::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--grad-primary);
+  border-radius: 0 3px 3px 0;
+}
+.sec-layer:hover {
+  border-color: var(--border-accent);
+  transform: translateX(4px);
+}
+.sec-layer-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.sec-layer-title {
+  font-weight: 700;
+  font-size: 14.5px;
+  margin-bottom: 4px;
+}
+.sec-layer-title code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent-indigo);
+  background: rgba(99,102,241,0.12);
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+}
+.sec-layer-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+/* Security visual */
+.sec-vault-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-xl);
+  padding: 32px;
+  box-shadow: var(--shadow-deep);
+  position: relative;
+  overflow: hidden;
+}
+.sec-vault-card::after {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%);
+  filter: blur(30px);
+}
+.sec-vault-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+.sec-vault-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+.sec-vault-desc {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 24px;
+}
+.sec-spec-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.sec-spec {
+  background: var(--bg-raised);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+}
+.sec-spec-key {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  margin-bottom: 4px;
+}
+.sec-spec-val {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent-indigo);
+}
+
+/* ═══════════════════════════════════
+   SCREENSHOTS SECTION
+═══════════════════════════════════ */
+#screenshots { background: var(--bg-base); }
+.screenshots-header { text-align: center; margin-bottom: 56px; }
+
+.screens-gallery {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  align-items: center;
+}
+
+.screen-item {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+  aspect-ratio: 9 / 18;
+}
+.screen-item:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: var(--border-accent);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(99,102,241,0.2);
+}
+.screen-item.featured {
+  transform: scale(1.06);
+  border-color: rgba(99,102,241,0.4);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.5), 0 0 0 1px rgba(99,102,241,0.25);
+}
+.screen-item.featured:hover { transform: scale(1.08) translateY(-4px); }
+
+/* Simulated screen content */
+.screen-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-base);
+  padding: 18px 12px 12px;
+  gap: 8px;
+}
+
+/* Each screen has a label */
+.screen-label {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(5,5,10,0.9);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  padding: 4px 12px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+  backdrop-filter: blur(8px);
+}
+
+/* ═══════════════════════════════════
+   DOWNLOAD SECTION
+═══════════════════════════════════ */
+#download { background: var(--bg-void); }
+
+.download-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-xl);
+  padding: 48px;
+  position: relative;
+  overflow: hidden;
+  max-width: 860px;
+  margin: 0 auto;
+}
+.download-card::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 360px; height: 360px;
+  background: radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 70%);
+  filter: blur(40px);
+}
+.download-card::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; left: -60px;
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(139,92,246,0.12) 0%, transparent 70%);
+  filter: blur(40px);
+}
+
+.download-inner { position: relative; z-index: 1; }
+.download-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.download-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  background: rgba(16,185,129,0.12);
+  border: 1px solid rgba(16,185,129,0.25);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent-green);
+  margin-bottom: 14px;
+}
+.download-badge-dot {
+  width: 6px; height: 6px;
+  background: var(--accent-green);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent-green);
+  animation: pulse 2s infinite;
+}
+.download-title {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 8px;
+}
+.download-sub {
+  font-size: 14.5px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.download-btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 28px;
+  background: var(--grad-primary);
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 8px 28px rgba(99,102,241,0.5), 0 2px 8px rgba(0,0,0,0.3);
+  transition: box-shadow 0.2s, transform 0.15s;
+  white-space: nowrap;
+}
+.download-btn:hover {
+  box-shadow: 0 12px 36px rgba(99,102,241,0.65), 0 4px 12px rgba(0,0,0,0.3);
+  transform: translateY(-2px);
+}
+.download-btn-icon { font-size: 20px; }
+
+/* Spec table */
+.download-specs {
+  margin-top: 36px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border-subtle);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+.spec-col {
+  padding: 0 24px;
+  border-right: 1px solid var(--border-subtle);
+}
+.spec-col:first-child { padding-left: 0; }
+.spec-col:last-child { border-right: none; }
+.spec-key {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 6px;
+}
+.spec-val {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+.spec-sub {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ═══════════════════════════════════
+   FAQ SECTION
+═══════════════════════════════════ */
+#faq { background: var(--bg-base); }
+
+.faq-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.faq-list { display: flex; flex-direction: column; gap: 8px; }
+.faq-item {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.faq-item:hover { border-color: var(--border-accent); }
+.faq-item.open { border-color: rgba(99,102,241,0.35); }
+.faq-q {
+  width: 100%;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  cursor: pointer;
+  background: none;
+  color: var(--text-primary);
+  font-size: 14.5px;
+  font-weight: 600;
+  text-align: left;
+  transition: background 0.2s;
+}
+.faq-q:hover { background: var(--bg-glass); }
+.faq-chevron {
+  width: 20px; height: 20px;
+  border: 1.5px solid var(--text-muted);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 11px;
+  color: var(--text-muted);
+  transition: transform 0.25s, border-color 0.2s, color 0.2s;
+}
+.faq-item.open .faq-chevron {
+  transform: rotate(180deg);
+  border-color: var(--accent-indigo);
+  color: var(--accent-indigo);
+}
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.25s;
+  padding: 0 20px;
+}
+.faq-item.open .faq-a {
+  max-height: 1000px;
+  padding: 0 20px 18px;
+}
+.faq-a p {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 14px;
+}
+
+/* ═══════════════════════════════════
+   FOOTER
+═══════════════════════════════════ */
+footer {
+  background: var(--bg-void);
+  border-top: 1px solid var(--border-subtle);
+  padding: 56px 0 32px;
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 48px;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+.footer-logo-icon {
+  width: 36px; height: 36px;
+  background: var(--grad-primary);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  box-shadow: 0 4px 14px rgba(99,102,241,0.4);
+}
+.footer-tagline {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  max-width: 280px;
+  margin-bottom: 20px;
+}
+.footer-version {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-faint);
+}
+
+.footer-col-title {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer-links a {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.footer-links a:hover { color: var(--text-primary); }
+
+.footer-bottom {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.footer-copy {
+  font-size: 12px;
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+}
+.footer-links-inline {
+  display: flex;
+  gap: 20px;
+}
+.footer-links-inline a {
+  font-size: 11.5px;
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  transition: color 0.2s;
+}
+.footer-links-inline a:hover { color: var(--text-secondary); }
+
+/* ═══════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════ */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ═══════════════════════════════════
+   DESKTOP LARGE SCREENS (1200px+)
+═══════════════════════════════════ */
+@media (min-width: 1200px) {
+  :root { --container-w: 1200px; }
+
+  /* Hero — two column layout */
+  #hero .container { max-width: var(--container-w); }
+  .hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 80px;
+    max-width: 100%;
+  }
+  .hero-content > div:first-child { max-width: 560px; }
+
+  /* Features — 4 columns for wide screens */
+  .features-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .feature-card.fc-large {
+    grid-column: span 2;
+  }
+
+  /* About — two column */
+  .about-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    max-width: 100%;
+    align-items: center;
+  }
+
+  /* Security full width centered */
+  .security-header-centered { max-width: 720px; }
+  #security .security-stack {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    max-width: 960px;
+    margin: 48px auto 0;
+  }
+
+  /* Download wider */
+  .download-card { max-width: 960px; }
+
+  /* FAQ wider right column */
+  .faq-layout { grid-template-columns: 280px 1fr; gap: 100px; }
+}
+
+/* ═══════════════════════════════════
+   DESKTOP MID (901px – 1199px)
+═══════════════════════════════════ */
+@media (min-width: 901px) and (max-width: 1199px) {
+  /* Security — centered single col */
+  .security-header-centered { max-width: 600px; }
+  #security .security-stack {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    max-width: 820px;
+    margin: 48px auto 0;
+  }
+
+  /* About — two column */
+  .about-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    max-width: 100%;
+    align-items: center;
+  }
+
+  /* Features — stay 3 col */
+  .features-grid { grid-template-columns: repeat(3, 1fr); }
+  .feature-card.fc-large { grid-column: span 2; }
+}
+
+/* ═══════════════════════════════════
+   RESPONSIVE — MOBILE
+═══════════════════════════════════ */
+@media (max-width: 900px) {
+  :root {
+    --section-pad: 72px 0;
+  }
+
+  /* Nav */
+  .nav-links { display: none; }
+  .nav-mobile-btn { display: flex; }
+
+  /* Hero */
+  #hero { padding: 100px 0 60px; min-height: auto; }
+  .hero-content {
+    text-align: center;
+  }
+  .hero-h1 { letter-spacing: -1.5px; }
+  .hero-desc { margin: 0 auto 36px; }
+  .hero-actions { justify-content: center; }
+  .hero-meta { justify-content: center; }
+  .hero-float-1, .hero-float-2 { display: none; }
+
+  /* Chain ticker */
+  .ticker-item { padding: 10px 20px; }
+
+  /* Features */
+  .features-grid { grid-template-columns: 1fr 1fr; }
+  .feature-card.fc-large { grid-column: span 2; }
+
+  /* Security */
+  #security .security-stack { grid-template-columns: 1fr; }
+
+  /* Screenshots */
+  .screens-gallery {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 12px;
+    padding-bottom: 12px;
+    scrollbar-width: none;
+  }
+  .screens-gallery::-webkit-scrollbar { display: none; }
+  .screen-item {
+    flex: 0 0 220px;
+    scroll-snap-align: start;
+  }
+  /* All screen items are visible in the horizontal scroll container — no items hidden */
+
+  /* Download */
+  .download-card { padding: 32px 24px; }
+  .download-header { flex-direction: column; }
+  .download-btn-group { flex-direction: row; flex-wrap: wrap; }
+  .download-specs {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .spec-col { border-right: none; padding: 0; }
+
+  /* FAQ */
+  .faq-layout { grid-template-columns: 1fr; gap: 40px; }
+
+  /* Footer */
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .footer-brand { grid-column: span 2; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+}
+
+@media (max-width: 600px) {
+  :root { --section-pad: 60px 0; }
+  .container { padding: 0 16px; }
+
+  /* Hero */
+  #hero { padding: 90px 0 52px; }
+  .hero-h1 { font-size: 34px; letter-spacing: -1px; }
+  .btn-primary, .btn-ghost { padding: 13px 20px; font-size: 14px; }
+
+  /* Features */
+  .features-grid { grid-template-columns: 1fr; }
+  .feature-card.fc-large { grid-column: span 1; }
+
+  /* Screenshots */
+  .screens-gallery {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 10px;
+    padding-bottom: 10px;
+    scrollbar-width: none;
+  }
+  .screen-item {
+    flex: 0 0 160px;
+    scroll-snap-align: start;
+  }
+  /* All screen items visible in horizontal scroll — no items need display override */
+  .screen-item.featured { transform: scale(1); }
+
+  /* Download */
+  .download-btn-group { flex-direction: column; }
+  .download-btn { justify-content: center; }
+  .download-specs { grid-template-columns: repeat(2, 1fr); }
+
+  /* Security specs */
+  .sec-spec-grid { grid-template-columns: 1fr 1fr; }
+
+  /* Footer */
+  .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+  .footer-brand { grid-column: span 1; }
+}
+
+/* ═══════════════════════════════════
+   REDUCED MOTION
+═══════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+  /* FIX: Disable smooth scroll for vestibular/motion-sensitive users */
+  html { scroll-behavior: auto !important; }
+  /* FIX: Pause ticker animation */
+  /* ticker is JS-driven — pause handled via matchMedia in script */
+}
+
+/* ── Focus styles — visible for keyboard/screen reader users ── */
+:focus-visible {
+  outline: 2px solid var(--accent-indigo);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+/* Remove default outline only when :focus-visible is supported */
+:focus:not(:focus-visible) { outline: none; }
+
+/* ═══════════════════════════════════
+   DOWNLOAD BUTTON (dl-trigger variant)
+   Overrides base .download-btn for the
+   styled APK download button
+═══════════════════════════════════ */
+.download-btn.dl-trigger {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 28px;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(99,102,241,0.45), 0 2px 8px rgba(0,0,0,0.3);
+  transition: transform 0.15s, box-shadow 0.2s;
+  text-decoration: none;
+  color: #fff;
+  min-width: 240px;
+  white-space: nowrap;
+}
+.download-btn.dl-trigger:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 40px rgba(99,102,241,0.6), 0 4px 12px rgba(0,0,0,0.3);
+}
+.dl-btn-icon {
+  background: rgba(255,255,255,0.15);
+  border-radius: 10px;
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.dl-btn-text { display: flex; flex-direction: column; gap: 2px; }
+.dl-btn-label { font-size: 16px; font-weight: 700; letter-spacing: -0.3px; }
+.dl-btn-meta { font-size: 11.5px; opacity: 0.7; font-family: var(--font-mono); }
+
+
+/* ── Install steps ── */
+.dl-steps {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-subtle);
+  flex-wrap: wrap;
+}
+.dl-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 160px;
+}
+.dl-step-num {
+  width: 28px; height: 28px;
+  background: rgba(99,102,241,0.15);
+  border: 1px solid rgba(99,102,241,0.35);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #a5b4fc;
+  flex-shrink: 0;
+}
+.dl-step-text { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+.dl-step-text strong { color: var(--text-primary); }
+.dl-step-arrow { color: var(--text-muted); font-size: 18px; flex-shrink: 0; }
+@media (max-width: 600px) {
+  .dl-step-arrow { display: none; }
+  .dl-steps { gap: 10px; }
+}
+</style>
+</head>
+
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- ═══════════════════════════════════
+     NAVIGATION
+═══════════════════════════════════ -->
+<nav id="nav" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo" aria-label="Nexus Wallet Home">
+      <div class="nav-logo-icon" aria-hidden="true">⬡</div>
+      Nexus Wallet
+    </a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#features">Features</a>
+      <a href="#security">Security</a>
+      <a href="#screenshots">Screenshots</a>
+      <a href="#faq">FAQ</a>
+      <a href="#download" class="nav-cta">Download APK</a>
+    </div>
+    <button class="nav-mobile-btn" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile nav drawer — aria-hidden toggled by JS when open/closed -->
+<div class="nav-drawer" id="nav-drawer" aria-hidden="true">
+  <a href="#about">About</a>
+  <a href="#features">Features</a>
+  <a href="#security">Security</a>
+  <a href="#screenshots">Screenshots</a>
+  <a href="#faq">FAQ</a>
+  <a href="#download" class="drawer-cta">⬇ Download APK</a>
+</div>
+
+<!-- ═══════════════════════════════════
+     HERO SECTION
+═══════════════════════════════════ -->
+<section id="hero" aria-label="Hero">
+<span id="main-content" tabindex="-1" style="position:absolute;"></span>
+  <div class="hero-orb hero-orb-1" aria-hidden="true"></div>
+  <div class="hero-orb hero-orb-2" aria-hidden="true"></div>
+  <div class="hero-orb hero-orb-3" aria-hidden="true"></div>
+  <div class="hero-grid" aria-hidden="true"></div>
+
+  <div class="container">
+    <div class="hero-content">
+      <!-- Left: Text -->
+      <div>
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          v2.0 · Android DeFi Wallet
+        </div>
+        <h1 class="hero-h1">
+          Your Keys.<br>
+          Your <span class="grad-text">Assets.</span><br>
+          Your Chain.
+        </h1>
+
+        <p class="hero-desc">
+          Nexus Wallet is a self-custody DeFi wallet for Android. Manage assets across multiple EVM networks with AES-256-GCM encryption, biometric unlock, and a built-in multi-DEX swap engine — no server. No custody.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#download" class="btn-primary">
+            <span class="btn-icon">⬇</span>
+            Download APK
+          </a>
+          <a href="#features" class="btn-ghost">
+            <span class="btn-icon">⬡</span>
+            Explore Features
+          </a>
+        </div>
+
+        <div class="hero-meta">
+          <div class="hero-tag">
+            <span class="dot" style="background:#10b981"></span>
+            Self-Custody
+          </div>
+          <div class="hero-tag">
+            <span class="dot" style="background:#22d3ee"></span>
+            AES-256-GCM
+          </div>
+          <div class="hero-tag">
+            <span class="dot" style="background:#8b5cf6"></span>
+            Free & Open Source
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Desktop decorative wallet card -->
+      <div class="hero-desktop-visual" aria-hidden="true">
+        <div class="hdv-card">
+          <!-- Header -->
+          <div class="hdv-header">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="width:28px;height:28px;background:var(--grad-primary);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;">⬡</div>
+              <span style="font-family:var(--font-display);font-weight:800;font-size:14px;">Nexus Wallet</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:10px;color:var(--accent-green);">
+              <div style="width:6px;height:6px;border-radius:50%;background:var(--accent-green);box-shadow:0 0 6px var(--accent-green);"></div>
+              Connected
+            </div>
+          </div>
+          <!-- Balance -->
+          <div class="hdv-balance-section">
+            <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);margin-bottom:6px;letter-spacing:0.5px;">TOTAL PORTFOLIO</div>
+            <div style="font-family:var(--font-display);font-size:36px;font-weight:800;letter-spacing:-1px;line-height:1;">$12,847<span style="font-size:20px;color:var(--text-secondary);">.39</span></div>
+            <div style="font-family:var(--font-mono);font-size:11px;color:var(--accent-green);margin-top:6px;">↑ +4.82% today</div>
+          </div>
+          <!-- Action row -->
+          <div class="hdv-actions">
+            <div class="hdv-action-btn">↑ Send</div>
+            <div class="hdv-action-btn">↓ Receive</div>
+            <div class="hdv-action-btn hdv-action-primary">⇄ Swap</div>
+          </div>
+          <!-- Token list -->
+          <div class="hdv-tokens">
+            <div class="hdv-token-row">
+              <div style="width:32px;height:32px;border-radius:50%;background:rgba(98,126,234,0.2);border:1px solid rgba(98,126,234,0.3);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#627eea;flex-shrink:0;">Ξ</div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-weight:600;font-size:13px;">Ethereum</div>
+                <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);">2.4817 ETH</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-weight:700;font-size:13px;">$8,204.12</div>
+                <div style="font-family:var(--font-mono);font-size:10px;color:var(--accent-green);">+3.2%</div>
+              </div>
+            </div>
+            <div class="hdv-token-row">
+              <div style="width:32px;height:32px;border-radius:50%;background:rgba(39,117,202,0.2);border:1px solid rgba(39,117,202,0.3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#2775ca;flex-shrink:0;">$</div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-weight:600;font-size:13px;">USDC</div>
+                <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);">3,500.00 USDC</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-weight:700;font-size:13px;">$3,500.00</div>
+                <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);">0.0%</div>
+              </div>
+            </div>
+            <div class="hdv-token-row">
+              <div style="width:32px;height:32px;border-radius:50%;background:rgba(99,102,241,0.2);border:1px solid rgba(99,102,241,0.3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--accent-indigo);flex-shrink:0;">B</div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-weight:600;font-size:13px;">Base</div>
+                <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);">Chain 8453</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-weight:700;font-size:13px;">$1,143.27</div>
+                <div style="font-family:var(--font-mono);font-size:10px;color:var(--accent-rose);">-1.4%</div>
+              </div>
+            </div>
+          </div>
+          <!-- Security badge -->
+          <div class="hdv-sec-badge">
+            <span style="font-size:12px;">🔒</span>
+            <span style="font-family:var(--font-mono);font-size:9px;color:var(--text-muted);">AES-256-GCM · Self-custody · No server</span>
+          </div>
+        </div>
+        <!-- Floating badges -->
+        <div class="hdv-float hdv-float-1">
+          <span style="font-size:14px;">⬡</span>
+          <div>
+            <div style="font-size:11px;font-weight:700;">Multi-DEX Swap</div>
+            <div style="font-family:var(--font-mono);font-size:9px;color:var(--text-muted);">23 aggregators</div>
+          </div>
+        </div>
+        <div class="hdv-float hdv-float-2">
+          <span style="font-size:14px;">🛡</span>
+          <div>
+            <div style="font-size:11px;font-weight:700;">Keys on-device</div>
+            <div style="font-family:var(--font-mono);font-size:9px;color:var(--accent-green);">No custody risk</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     CHAIN TICKER
+     Note: All logos are inline SVG data URIs — no third-party CDN dependency.
+═══════════════════════════════════ -->
+<!-- Inline SVG chain logo definitions (no external CDN needed) -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- Ethereum -->
+  <symbol id="logo-eth" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#627EEA"/><path d="M16.498 4v8.87l7.497 3.35z" fill="#fff" fill-opacity=".6"/><path d="M16.498 4L9 16.22l7.498-3.35z" fill="#fff"/><path d="M16.498 21.968v6.027L24 17.616z" fill="#fff" fill-opacity=".6"/><path d="M16.498 27.995v-6.028L9 17.616z" fill="#fff"/><path d="M16.498 20.573l7.497-4.353-7.497-3.348z" fill="#fff" fill-opacity=".2"/><path d="M9 16.22l7.498 4.353v-7.7z" fill="#fff" fill-opacity=".6"/></symbol>
+  <!-- Polygon -->
+  <symbol id="logo-matic" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#8247E5"/><path d="M21.2 12.9c-.4-.2-.9-.2-1.3 0l-3 1.7-2 1.2-3 1.7c-.4.2-.9.2-1.3 0l-2.4-1.4c-.4-.2-.6-.6-.6-1v-2.7c0-.4.2-.8.6-1l2.3-1.3c.4-.2.9-.2 1.3 0l2.3 1.3c.4.2.6.6.6 1v1.7l2-.1v-1.8c0-.4-.2-.8-.6-1l-4.2-2.4c-.4-.2-.9-.2-1.3 0l-4.3 2.5c-.4.2-.6.6-.6 1v4.9c0 .4.2.8.6 1l4.3 2.5c.4.2.9.2 1.3 0l3-1.7 2-1.2 3-1.7c.4-.2.9-.2 1.3 0l2.3 1.3c.4.2.6.6.6 1v2.7c0 .4-.2.8-.6 1l-2.3 1.3c-.4.2-.9.2-1.3 0l-2.3-1.3c-.4-.2-.6-.6-.6-1v-1.7l-2 1.1v1.8c0 .4.2.8.6 1l4.3 2.5c.4.2.9.2 1.3 0l4.3-2.5c.4-.2.6-.6.6-1v-4.9c0-.4-.2-.8-.6-1l-4.4-2.5z" fill="#fff"/></symbol>
+  <!-- Arbitrum One (official web3icons paths, scaled to 32x32) -->
+  <symbol id="logo-arb" viewBox="0 0 24 24">
+    <path fill="#213147" d="M4.515 8.471v7.056c0 .45.245.867.64 1.092l6.205 3.529a1.3 1.3 0 0 0 1.28 0l6.203-3.53c.396-.224.64-.64.64-1.09V8.47c0-.45-.244-.867-.64-1.091L12.64 3.85a1.3 1.3 0 0 0-1.28 0L5.155 7.38a1.25 1.25 0 0 0-.639 1.091"/>
+    <path fill="#12AAFF" d="m13.353 13.368-.885 2.39a.3.3 0 0 0 0 .205l1.523 4.112 1.76-1.001-2.113-5.706a.152.152 0 0 0-.285 0m1.774-4.019a.152.152 0 0 0-.285 0l-.885 2.39a.3.3 0 0 0 0 .205l2.494 6.732 1.761-1.001z"/>
+    <path fill="#9DCCED" d="M11.998 4.115a.3.3 0 0 1 .126.033l6.715 3.818a.25.25 0 0 1 .126.214v7.635c0 .089-.048.17-.126.214l-6.715 3.819a.25.25 0 0 1-.126.032.3.3 0 0 1-.125-.032l-6.715-3.815a.25.25 0 0 1-.126-.215V8.182c0-.089.048-.17.126-.215l6.715-3.818a.26.26 0 0 1 .125-.034m0-1.115c-.238 0-.478.06-.692.183L4.593 7A1.36 1.36 0 0 0 3.9 8.182v7.635c0 .487.264.938.693 1.181l6.714 3.819a1.41 1.41 0 0 0 1.386 0l6.714-3.818a1.36 1.36 0 0 0 .693-1.182V8.182A1.36 1.36 0 0 0 19.407 7l-6.716-3.817A1.4 1.4 0 0 0 11.998 3"/>
+    <path fill="#213147" d="m7.559 18.685.617-1.666 1.244 1.018-1.163 1.046z"/>
+    <path fill="#fff" d="M11.433 7.635H9.731a.3.3 0 0 0-.285.197l-3.649 9.852 1.761 1.001 4.018-10.849a.15.15 0 0 0-.143-.2m2.979-.001h-1.703a.3.3 0 0 0-.284.197l-4.167 11.25 1.761 1 4.535-12.246a.15.15 0 0 0-.142-.2"/>
+  </symbol>
+  <!-- Optimism (official web3icons paths) -->
+  <symbol id="logo-op" viewBox="0 0 24 24">
+    <rect width="24" height="24" rx="12" fill="#FE0420"/>
+    <path fill="#fff" fill-rule="evenodd" d="M3.966 15.8q.979.7 2.512.7 1.854 0 2.962-.838 1.108-.85 1.559-2.562.27-1.05.464-2.163.063-.398.064-.663 0-.874-.451-1.499a2.7 2.7 0 0 0-1.237-.95Q9.053 7.5 8.062 7.5q-3.644 0-4.52 3.437a40 40 0 0 0-.477 2.163q-.058.335-.065.674 0 1.314.966 2.026m4.65-2.775c-.247.957-.926 1.58-1.958 1.58-1.02 0-1.368-.69-1.184-1.58a27 27 0 0 1 .464-2.05c.265-1.034.89-1.58 1.956-1.58 1.017 0 1.348.68 1.173 1.58a30 30 0 0 1-.451 2.05m3.902 3.385q.076.09.214.089h1.704a.38.38 0 0 0 .238-.089.36.36 0 0 0 .138-.232l.538-2.52h1.733c1.094 0 1.95-.53 2.576-1.002q.953-.707 1.266-2.186.075-.348.075-.67 0-1.117-.851-1.71-.84-.591-2.23-.591h-3.333a.38.38 0 0 0-.238.09.38.38 0 0 0-.138.232l-1.73 8.356a.3.3 0 0 0 .038.232m6.09-5.966c-.157.689-.757 1.319-1.462 1.319h-1.44l.496-2.369h1.503c.512 0 .94.102.94.665q0 .165-.037.385" clip-rule="evenodd"/>
+  </symbol>
+  <!-- Base -->
+  <symbol id="logo-base" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#0052FF"/><path fill="#fff" d="M16.1 25.7c5.4 0 9.8-4.4 9.8-9.8s-4.4-9.8-9.8-9.8C11 6.1 6.8 9.9 6.6 15h13.1v1.7H6.6c.3 5.1 4.5 9 9.5 9z"/></symbol>
+  <!-- BNB -->
+  <symbol id="logo-bnb" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#F3BA2F"/><path d="M12.1 14.3L16 10.4l3.9 3.9 2.3-2.3L16 5.8 9.8 12l2.3 2.3zM5.8 16l2.3-2.3L10.4 16l-2.3 2.3L5.8 16zm6.3 1.7L16 21.6l3.9-3.9 2.3 2.3L16 26.2l-6.2-6.2 2.3-2.3zm9.6-1.7l2.3-2.3L26.2 16l-2.3 2.3L21.7 16zm-3.6 0l-2.1-2.1L14 16l2.1 2.1L18.1 16z" fill="#fff"/></symbol>
+  <!-- Avalanche -->
+  <symbol id="logo-avax" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#E84142"/><path d="M20.2 20.7h3.4c.3 0 .5-.1.7-.3.1-.2.1-.4 0-.6l-7.6-13.1c-.1-.2-.4-.3-.6-.3-.3 0-.5.1-.6.3l-7.6 13.1c-.1.2-.1.4 0 .6.1.2.3.3.7.3h3.4c.5 0 .9-.3 1.2-.7l2.9-5c.1-.2.3-.3.5-.3s.4.1.5.3l2.9 5c.2.4.6.7 1.2.7z" fill="#fff"/></symbol>
+  <!-- zkSync Era (official web3icons/matter-labs mark) -->
+  <symbol id="logo-zksync" viewBox="0 0 24 24">
+    <rect width="24" height="24" rx="12" fill="#1755F4"/>
+    <path fill="#fff" fill-rule="evenodd" d="m21 12-5.106-4.498v3.296l-5.07 3.298 5.07.002V16.5zM3 12l5.106 4.5v-3.263l5.034-3.3-5.032-.002V7.5z" clip-rule="evenodd"/>
+  </symbol>
+</svg>
+<div id="chain-ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <!-- First set -->
+    <div class="ticker-item"><svg width="20" height="20" style="flex-shrink:0;" aria-hidden="true"><use href="#logo-eth"/></svg><span class="ticker-name">Ethereum</span><span class="ticker-id">· Chain 1</span></div>
+    <div class="ticker-item"><svg width="20" height="20" style="flex-shrink:0;" aria-hidden="true"><use href="#logo-matic"/></svg><span class="ticker-name">Polygon</span><span class="ticker-id">· Chain 137</span></div>
+    <div class="ticker-item"><svg width="20" height="20" style="flex-shrink:0;" aria-hidden="true"><use href="#logo-arb"/></svg><span class="ticker-name">Arbitrum</span><span class="ticker-id">· Chain 42161</span></div>
+    <div class="ticker-item"><svg width="20" height="20" style="flex-shrink:0;" aria-hidden="true"><use href="#logo-op"/></svg><span class="ticker-name">Optimism</span><span class="ticker-id">· Chain 10</span></div>
+    <div class="ticker-item"><svg width="20" height="20" style="flex-shrink:0;" aria-hidden="true"><use href="#logo-base"/></svg><span class="ticker-name">Base</span><span class="ticker-id">· Chain 8453</span></div>
+    <div class="ticker-item"><svg width="20" height="20" style="flex-shrink:0;" aria-hidden="true"><use href="#logo-bnb"/></svg><span class="ticker-name">BSC</span><span class="ticker-id">· Chain 56</span></div>
+    <div class="ticker-item"><svg width="20" height="20" style="flex-shrink:0;" aria-hidden="true"><use href="#logo-avax"/></svg><span class="ticker-name">Avalanche</span><span class="ticker-id">· Chain 43114</span></div>
+    <div class="ticker-item"><svg width="20" height="20" style="flex-shrink:0;" aria-hidden="true"><use href="#logo-zksync"/></svg><span class="ticker-name">zkSync Era</span><span class="ticker-id">· Chain 324</span></div>
+    <!-- Duplicate for seamless loop -->
+    <div class="ticker-item"><svg width="20" height="20" style="flex-shrink:0;" aria-hidden="true"><use href="#logo-eth"/></svg><span class="ticker-name">Ethereum</span><span class="ticker-id">· Chain 1</span></div>
+    <div class="ticker-item"><svg width="20" height="20" style="flex-shrink:0;" aria-hidden="true"><use href="#logo-matic"/></svg><span class="ticker-name">Polygon</span><span class="ticker-id">· Chain 137</span></div>
+    <div class="ticker-item"><svg width="20" height="20" style="flex-shrink:0;" aria-hidden="true"><use href="#logo-arb"/></svg><span class="ticker-name">Arbitrum</span><span class="ticker-id">· Chain 42161</span></div>
+    <div class="ticker-item"><svg width="20" height="20" style="flex-shrink:0;" aria-hidden="true"><use href="#logo-op"/></svg><span class="ticker-name">Optimism</span><span class="ticker-id">· Chain 10</span></div>
+    <div class="ticker-item"><svg width="20" height="20" style="flex-shrink:0;" aria-hidden="true"><use href="#logo-base"/></svg><span class="ticker-name">Base</span><span class="ticker-id">· Chain 8453</span></div>
+    <div class="ticker-item"><svg width="20" height="20" style="flex-shrink:0;" aria-hidden="true"><use href="#logo-bnb"/></svg><span class="ticker-name">BSC</span><span class="ticker-id">· Chain 56</span></div>
+    <div class="ticker-item"><svg width="20" height="20" style="flex-shrink:0;" aria-hidden="true"><use href="#logo-avax"/></svg><span class="ticker-name">Avalanche</span><span class="ticker-id">· Chain 43114</span></div>
+    <div class="ticker-item"><svg width="20" height="20" style="flex-shrink:0;" aria-hidden="true"><use href="#logo-zksync"/></svg><span class="ticker-name">zkSync Era</span><span class="ticker-id">· Chain 324</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     FEATURES SECTION
+═══════════════════════════════════ -->
+<section id="features" aria-labelledby="features-title">
+  <div class="container">
+    <div class="features-header">
+      <div class="section-tag reveal">Features</div>
+      <h2 class="section-title reveal reveal-delay-1" id="features-title">Built for real DeFi usage</h2>
+      <p class="section-desc reveal reveal-delay-2">Every feature in Nexus Wallet is verified as implemented in the application build. No marketing promises — only what actually exists.</p>
+    </div>
+
+    <div class="features-grid">
+
+      <!-- Multi-Chain Support -->
+      <div class="feature-card fc-indigo fc-large reveal">
+        <div class="feature-icon-wrap">🌐</div>
+        <div class="feature-card-title">Multi-Chain Support</div>
+        <div class="feature-card-desc">Switch between multiple EVM-compatible networks from a single interface. Ethereum, Polygon, Arbitrum, Optimism, Base, BSC, Avalanche, and zkSync Era — plus the ability to add any custom EVM network by entering a Chain ID, RPC URL, and native token symbol.</div>
+        <div class="feature-chip">8 networks · Custom EVM</div>
+      </div>
+
+      <!-- Wallet Import & Export -->
+      <div class="feature-card fc-violet reveal reveal-delay-2">
+        <div class="feature-icon-wrap">📥</div>
+        <div class="feature-card-title">Wallet Import & Export</div>
+        <div class="feature-card-desc">Import wallets via 12 or 24-word BIP-39 mnemonic phrases (standard m/44'/60'/0'/0/0 derivation path) or raw private keys. Supports bulk import and wallet group management.</div>
+        <div class="feature-chip">BIP-39 · BIP-44</div>
+      </div>
+
+      <!-- Transfer Hub -->
+      <div class="feature-card fc-cyan reveal">
+        <div class="feature-icon-wrap">⚡</div>
+        <div class="feature-card-title">Transfer Hub</div>
+        <div class="feature-card-desc">A batch transfer engine for sending assets from multiple wallets simultaneously. Includes a self-transfer mode for consolidating funds to a single address across all managed wallets.</div>
+        <div class="feature-chip">Batch · Multi-wallet</div>
+      </div>
+
+      <!-- DEX Swap -->
+      <div class="feature-card fc-amber reveal reveal-delay-1">
+        <div class="feature-icon-wrap">⇄</div>
+        <div class="feature-card-title">Multi-DEX Swap Engine</div>
+        <div class="feature-card-desc">Aggregates quotes from multiple DEXs including Uniswap V3, 1inch, Odos, KyberSwap, Enso, and others to find the best swap rate. Slippage and gas mode are configurable.</div>
+        <div class="feature-chip">Uniswap · Odos · 1inch · KyberSwap</div>
+      </div>
+
+      <!-- Bridge -->
+      <div class="feature-card fc-rose reveal reveal-delay-2">
+        <div class="feature-icon-wrap">⊞</div>
+        <div class="feature-card-title">Cross-Chain Bridge</div>
+        <div class="feature-card-desc">Built-in bridge interface for moving assets between supported EVM networks. Select source and destination chains, choose a token, and execute cross-chain transfers directly in the app.</div>
+        <div class="feature-chip">Cross-chain · EVM</div>
+      </div>
+
+      <!-- Multi-RPC -->
+      <div class="feature-card fc-indigo reveal">
+        <div class="feature-icon-wrap">🔄</div>
+        <div class="feature-card-title">Multi-RPC Fallback</div>
+        <div class="feature-card-desc">Configure multiple RPC endpoints per chain. The wallet automatically tries each RPC in order if one fails — no manual switching required, no silent transaction failures.</div>
+        <div class="feature-chip">Automatic failover</div>
+      </div>
+
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════
+     SECURITY SECTION
+═══════════════════════════════════ -->
+<section id="security" aria-labelledby="security-title">
+  <div class="container">
+    <div class="security-header-centered">
+      <div class="section-tag reveal" style="justify-content:center;">Security</div>
+      <h2 class="section-title reveal reveal-delay-1" id="security-title" style="text-align:center;">
+        Your keys, locked<br>by cryptography.
+      </h2>
+      <p class="section-desc reveal reveal-delay-2" style="text-align:center;margin:0 auto;">
+        Every security feature in Nexus Wallet is verifiable in the open-source build. No marketing claims — only what is actually implemented.
+      </p>
+    </div>
+
+    <div class="security-layout">
+      <div class="security-stack">
+      <div class="sec-layer reveal reveal-delay-1">
+        <div class="sec-layer-icon">🛡</div>
+        <div class="sec-layer-body">
+          <div class="sec-layer-title">Encrypted Storage <code>AES-256-GCM</code></div>
+          <div class="sec-layer-desc">Private keys are never stored in plaintext. Each key is encrypted with AES-256-GCM before being saved. Legacy plaintext keys detected on read are automatically re-encrypted to the v4 format.</div>
+        </div>
+      </div>
+      <div class="sec-layer reveal reveal-delay-2">
+        <div class="sec-layer-icon">🔑</div>
+        <div class="sec-layer-body">
+          <div class="sec-layer-title">Key Derivation <code>PBKDF2</code></div>
+          <div class="sec-layer-desc">The encryption key is derived from your PIN or pattern using PBKDF2 with 200,000 SHA-256 iterations. This makes brute-force attacks computationally expensive even on high-end hardware.</div>
+        </div>
+      </div>
+      <div class="sec-layer reveal reveal-delay-3">
+        <div class="sec-layer-icon">🤳</div>
+        <div class="sec-layer-body">
+          <div class="sec-layer-title">Biometric Authentication</div>
+          <div class="sec-layer-desc">Supports Fingerprint and Face ID via AndroidX Biometric (androidx.biometric v1.1.0). Biometric unlock is layered on top of the PIN/pattern — if biometric fails, the user falls back to PIN or pattern.</div>
+        </div>
+      </div>
+      <div class="sec-layer reveal reveal-delay-4">
+        <div class="sec-layer-icon">🔢</div>
+        <div class="sec-layer-body">
+          <div class="sec-layer-title">6-Digit PIN & Pattern Lock</div>
+          <div class="sec-layer-desc">Choose between a 6-digit PIN or a visual pattern lock as your primary credential. Multiple methods can be registered and one set as the default unlock method.</div>
+        </div>
+      </div>
+      <div class="sec-layer reveal reveal-delay-1">
+        <div class="sec-layer-icon">⛔</div>
+        <div class="sec-layer-body">
+          <div class="sec-layer-title">No Cloud Backup — Ever</div>
+          <div class="sec-layer-desc">Your wallet data is never backed up to Google Drive or any cloud service. The app is configured to block Android's automatic backup system entirely, so your private keys cannot be silently copied to the cloud without your knowledge.</div>
+        </div>
+      </div>
+    </div><!-- /.security-stack -->
+    </div><!-- /.security-layout -->
+  </div><!-- /.container -->
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════
+     SCREENSHOTS SECTION
+═══════════════════════════════════ -->
+<section id="screenshots" aria-labelledby="screenshots-title">
+  <div class="container">
+    <div class="screenshots-header">
+      <div class="section-tag reveal">Screenshots</div>
+      <h2 class="section-title reveal reveal-delay-1" id="screenshots-title">See the interface</h2>
+      <p class="section-desc reveal reveal-delay-2">The Nexus Wallet UI is built using Syne and JetBrains Mono for precise, readable typography — optimized for dark environments and OLED screens.</p>
+    </div>
+
+    <div class="screens-gallery reveal">
+
+      <!-- Screen 1: Dashboard -->
+      <div class="screen-item" tabindex="0" role="button" aria-label="View Dashboard screen">
+        <div class="screen-content" aria-hidden="true">
+          <div style="height:8px;background:var(--bg-raised);border-radius:4px;"></div>
+          <div style="height:60px;background:linear-gradient(135deg,rgba(99,102,241,0.2),rgba(139,92,246,0.15));border-radius:12px;border:1px solid rgba(99,102,241,0.2);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;">
+            <div style="font-size:14px;font-weight:800;font-family:'Syne',sans-serif;color:var(--text-primary);">$4,831.20</div>
+            <div style="font-size:7px;color:var(--accent-green);font-family:'JetBrains Mono',monospace;">Live Balance</div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:4px;">
+            <div style="height:36px;background:var(--bg-raised);border-radius:8px;border:1px solid var(--border-subtle);display:flex;align-items:center;justify-content:center;font-size:10px;">↑</div>
+            <div style="height:36px;background:var(--bg-raised);border-radius:8px;border:1px solid var(--border-subtle);display:flex;align-items:center;justify-content:center;font-size:10px;">↓</div>
+            <div style="height:36px;background:var(--bg-raised);border-radius:8px;border:1px solid var(--border-subtle);display:flex;align-items:center;justify-content:center;font-size:10px;">⇄</div>
+            <div style="height:36px;background:var(--bg-raised);border-radius:8px;border:1px solid var(--border-subtle);display:flex;align-items:center;justify-content:center;font-size:10px;">⊞</div>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:4px;">
+            <div style="height:18px;background:var(--bg-raised);border-radius:6px;border:1px solid var(--border-subtle);"></div>
+            <div style="height:18px;background:var(--bg-raised);border-radius:6px;border:1px solid var(--border-subtle);"></div>
+            <div style="height:18px;background:var(--bg-raised);border-radius:6px;border:1px solid var(--border-subtle);"></div>
+          </div>
+        </div>
+        <div class="screen-label">Dashboard</div>
+      </div>
+
+      <!-- Screen 2: Swap -->
+      <div class="screen-item" tabindex="0" role="button" aria-label="View Token Swap screen">
+        <div class="screen-content" aria-hidden="true">
+          <div style="height:8px;background:var(--bg-raised);border-radius:4px;"></div>
+          <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:11px;padding:4px 0;">Token Swap</div>
+          <div style="height:44px;background:var(--bg-raised);border-radius:10px;border:1px solid var(--border-subtle);padding:8px;display:flex;align-items:center;gap:6px;">
+            <div style="width:20px;height:20px;border-radius:50%;background:rgba(98,126,234,0.3);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#627eea;flex-shrink:0;">Ξ</div>
+            <div style="font-size:8px;font-family:'JetBrains Mono',monospace;color:var(--text-muted);">ETH — 1.2847</div>
+          </div>
+          <div style="height:16px;background:rgba(99,102,241,0.12);border-radius:8px;border:1px solid rgba(99,102,241,0.2);display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--accent-indigo);">⇅</div>
+          <div style="height:44px;background:var(--bg-raised);border-radius:10px;border:1px solid var(--border-subtle);padding:8px;display:flex;align-items:center;gap:6px;">
+            <div style="width:20px;height:20px;border-radius:50%;background:rgba(39,117,202,0.3);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#2775ca;flex-shrink:0;">$</div>
+            <div style="font-size:8px;font-family:'JetBrains Mono',monospace;color:var(--text-muted);">USDC — ?</div>
+          </div>
+          <div style="height:8px;background:var(--bg-raised);border-radius:4px;width:80%;"></div>
+          <div style="flex:1;background:var(--grad-primary);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff;min-height:24px;">Get Best Quote</div>
+        </div>
+        <div class="screen-label">Swap</div>
+      </div>
+
+      <!-- Screen 3: FEATURED — Transfer Hub (center) -->
+      <div class="screen-item featured" tabindex="0" role="button" aria-label="View Transfer Hub screen">
+        <div class="screen-content" aria-hidden="true">
+          <div style="height:8px;background:var(--bg-raised);border-radius:4px;"></div>
+          <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:11px;padding:4px 0;">Transfer Hub</div>
+          <div style="height:6px;background:linear-gradient(90deg,var(--accent-indigo),var(--accent-violet));border-radius:3px;"></div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:5px;">
+            <div style="height:20px;background:var(--bg-raised);border-radius:6px;border:1px solid var(--border-subtle);display:flex;align-items:center;padding:0 8px;gap:6px;">
+              <div style="width:10px;height:10px;border-radius:50%;background:rgba(98,126,234,0.3);flex-shrink:0;"></div>
+              <div style="height:4px;background:var(--text-faint);border-radius:2px;flex:1;"></div>
+              <div style="font-size:7px;font-family:'JetBrains Mono',monospace;color:var(--accent-green);">✓</div>
+            </div>
+            <div style="height:20px;background:var(--bg-raised);border-radius:6px;border:1px solid var(--border-subtle);display:flex;align-items:center;padding:0 8px;gap:6px;">
+              <div style="width:10px;height:10px;border-radius:50%;background:rgba(139,92,246,0.3);flex-shrink:0;"></div>
+              <div style="height:4px;background:var(--text-faint);border-radius:2px;flex:1;"></div>
+              <div style="font-size:7px;font-family:'JetBrains Mono',monospace;color:var(--accent-green);">✓</div>
+            </div>
+            <div style="height:20px;background:var(--bg-raised);border-radius:6px;border:1px solid rgba(99,102,241,0.3);display:flex;align-items:center;padding:0 8px;gap:6px;">
+              <div style="width:10px;height:10px;border-radius:50%;background:rgba(99,102,241,0.3);flex-shrink:0;"></div>
+              <div style="height:4px;background:var(--text-faint);border-radius:2px;flex:1;"></div>
+              <div style="font-size:7px;font-family:'JetBrains Mono',monospace;color:var(--accent-amber);">…</div>
+            </div>
+            <div style="height:14px;background:var(--bg-raised);border-radius:4px;border:1px solid var(--border-subtle);"></div>
+            <div style="height:14px;background:var(--bg-raised);border-radius:4px;border:1px solid var(--border-subtle);"></div>
+          </div>
+          <div style="height:22px;background:var(--grad-primary);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:700;color:#fff;">Execute Batch Transfer</div>
+        </div>
+        <div class="screen-label">Transfer Hub</div>
+      </div>
+
+      <!-- Screen 4: Security / Lock -->
+      <div class="screen-item" tabindex="0" role="button" aria-label="View Security Settings screen">
+        <div class="screen-content" aria-hidden="true">
+          <div style="height:8px;background:var(--bg-raised);border-radius:4px;"></div>
+          <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:11px;padding:4px 0;">Security</div>
+          <div style="display:flex;flex-direction:column;gap:5px;flex:1;">
+            <div style="height:30px;background:rgba(16,185,129,0.1);border-radius:8px;border:1px solid rgba(16,185,129,0.2);display:flex;align-items:center;padding:0 8px;gap:6px;">
+              <span style="font-size:11px;">🤳</span>
+              <div style="height:4px;background:rgba(16,185,129,0.3);border-radius:2px;flex:1;"></div>
+              <div style="width:8px;height:8px;background:var(--accent-green);border-radius:50%;"></div>
+            </div>
+            <div style="height:30px;background:var(--bg-raised);border-radius:8px;border:1px solid var(--border-subtle);display:flex;align-items:center;padding:0 8px;gap:6px;">
+              <span style="font-size:11px;">🔢</span>
+              <div style="height:4px;background:var(--text-faint);border-radius:2px;flex:1;"></div>
+            </div>
+            <div style="height:30px;background:var(--bg-raised);border-radius:8px;border:1px solid var(--border-subtle);display:flex;align-items:center;padding:0 8px;gap:6px;">
+              <span style="font-size:11px;">🔣</span>
+              <div style="height:4px;background:var(--text-faint);border-radius:2px;flex:1;"></div>
+            </div>
+            <div style="margin-top:4px;height:4px;background:var(--text-faint);border-radius:2px;width:60%;"></div>
+            <div style="height:4px;background:var(--text-faint);border-radius:2px;width:80%;"></div>
+            <div style="height:4px;background:var(--text-faint);border-radius:2px;width:40%;"></div>
+          </div>
+        </div>
+        <div class="screen-label">Security</div>
+      </div>
+
+      <!-- Screen 5: Transaction History -->
+      <div class="screen-item" tabindex="0" role="button" aria-label="View Transaction History screen">
+        <div class="screen-content" aria-hidden="true">
+          <div style="height:8px;background:var(--bg-raised);border-radius:4px;"></div>
+          <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:11px;padding:4px 0;">History</div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:4px;">
+            <div style="height:22px;background:var(--bg-raised);border-radius:6px;border:1px solid var(--border-subtle);display:flex;align-items:center;padding:0 6px;gap:4px;">
+              <span style="font-size:9px;color:var(--accent-green);">↓</span>
+              <div style="height:3px;background:var(--text-faint);border-radius:1px;flex:1;"></div>
+              <div style="font-size:7px;font-family:'JetBrains Mono',monospace;color:var(--accent-green);">+1.28 ETH</div>
+            </div>
+            <div style="height:22px;background:var(--bg-raised);border-radius:6px;border:1px solid var(--border-subtle);display:flex;align-items:center;padding:0 6px;gap:4px;">
+              <span style="font-size:9px;color:var(--accent-rose);">↑</span>
+              <div style="height:3px;background:var(--text-faint);border-radius:1px;flex:1;"></div>
+              <div style="font-size:7px;font-family:'JetBrains Mono',monospace;color:var(--accent-rose);">-500 USDC</div>
+            </div>
+            <div style="height:22px;background:var(--bg-raised);border-radius:6px;border:1px solid var(--border-subtle);display:flex;align-items:center;padding:0 6px;gap:4px;">
+              <span style="font-size:9px;color:var(--accent-indigo);">⇄</span>
+              <div style="height:3px;background:var(--text-faint);border-radius:1px;flex:1;"></div>
+              <div style="font-size:7px;font-family:'JetBrains Mono',monospace;color:var(--accent-indigo);">Swap</div>
+            </div>
+            <div style="height:22px;background:var(--bg-raised);border-radius:6px;border:1px solid var(--border-subtle);"></div>
+            <div style="height:22px;background:var(--bg-raised);border-radius:6px;border:1px solid var(--border-subtle);"></div>
+          </div>
+        </div>
+        <div class="screen-label">History</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════
+     ABOUT SECTION
+═══════════════════════════════════ -->
+<section id="about" aria-labelledby="about-title">
+  <div class="container">
+    <div class="about-grid">
+
+      <!-- Left: Text -->
+      <div>
+        <div class="section-tag reveal">About</div>
+        <h2 class="section-title reveal reveal-delay-1" id="about-title">
+          One wallet.<br>Every chain.
+        </h2>
+        <p class="section-desc reveal reveal-delay-2">
+          Nexus Wallet is a native Android application that wraps a full DeFi interface in a secure, hardware-accelerated WebView. Wallet data is encrypted on-device — no servers, no cloud sync, no custody.
+        </p>
+
+        <div class="about-benefits">
+          <div class="benefit-item reveal reveal-delay-2">
+            <div class="benefit-icon">🔑</div>
+            <div class="benefit-text">
+              <div class="benefit-title">Full Self-Custody</div>
+              <div class="benefit-desc">Your private keys are encrypted and stored only on your device. Nexus Wallet never transmits your keys anywhere.</div>
+            </div>
+          </div>
+
+          <div class="benefit-item reveal reveal-delay-4">
+            <div class="benefit-icon">📴</div>
+            <div class="benefit-text">
+              <div class="benefit-title">No Account Required</div>
+              <div class="benefit-desc">No registration, no email, no KYC. Create a wallet or import an existing one using a mnemonic seed phrase or private key.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Desktop chain grid visual -->
+      <div class="about-visual reveal reveal-delay-2">
+        <div class="about-visual-inner">
+          <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:16px;">Supported Networks</div>
+          <div class="about-chain-grid">
+            <div class="about-chain-item">
+              <svg width="28" height="28" role="img" aria-label="Ethereum logo"><use href="#logo-eth"/></svg>
+              <div class="about-chain-name">Ethereum</div>
+              <div class="about-chain-id">Chain 1</div>
+            </div>
+            <div class="about-chain-item">
+              <svg width="28" height="28" role="img" aria-label="Polygon logo"><use href="#logo-matic"/></svg>
+              <div class="about-chain-name">Polygon</div>
+              <div class="about-chain-id">Chain 137</div>
+            </div>
+            <div class="about-chain-item">
+              <svg width="28" height="28" role="img" aria-label="Arbitrum logo"><use href="#logo-arb"/></svg>
+              <div class="about-chain-name">Arbitrum</div>
+              <div class="about-chain-id">Chain 42161</div>
+            </div>
+            <div class="about-chain-item">
+              <svg width="28" height="28" role="img" aria-label="Optimism logo"><use href="#logo-op"/></svg>
+              <div class="about-chain-name">Optimism</div>
+              <div class="about-chain-id">Chain 10</div>
+            </div>
+            <div class="about-chain-item">
+              <svg width="28" height="28" role="img" aria-label="Base logo"><use href="#logo-base"/></svg>
+              <div class="about-chain-name">Base</div>
+              <div class="about-chain-id">Chain 8453</div>
+            </div>
+            <div class="about-chain-item">
+              <svg width="28" height="28" role="img" aria-label="BNB Smart Chain logo"><use href="#logo-bnb"/></svg>
+              <div class="about-chain-name">BSC</div>
+              <div class="about-chain-id">Chain 56</div>
+            </div>
+            <div class="about-chain-item">
+              <svg width="28" height="28" role="img" aria-label="Avalanche logo"><use href="#logo-avax"/></svg>
+              <div class="about-chain-name">Avalanche</div>
+              <div class="about-chain-id">Chain 43114</div>
+            </div>
+            <div class="about-chain-item">
+              <svg width="28" height="28" role="img" aria-label="zkSync Era logo"><use href="#logo-zksync"/></svg>
+              <div class="about-chain-name">zkSync Era</div>
+              <div class="about-chain-id">Chain 324</div>
+            </div>
+            <div class="about-chain-item about-chain-custom">
+              <div style="font-size:20px;">＋</div>
+              <div class="about-chain-name">Custom</div>
+              <div class="about-chain-id">Any EVM</div>
+            </div>
+          </div>
+          <div style="margin-top:16px;padding:12px 16px;background:rgba(99,102,241,0.07);border:1px solid rgba(99,102,241,0.15);border-radius:var(--radius-md);font-family:var(--font-mono);font-size:10px;color:var(--text-muted);line-height:1.6;">
+            Add any EVM network via<br><span style="color:var(--accent-indigo);">Chain ID · RPC URL · Token Symbol</span>
+          </div>
+        </div>
+      </div>
+    </div><!-- /.about-grid -->
+  </div><!-- /.container -->
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════
+     DOWNLOAD SECTION
+═══════════════════════════════════ -->
+<section id="download" aria-labelledby="download-title">
+  <div class="container">
+    <div class="download-card reveal">
+      <div class="download-inner">
+
+        <!-- Header -->
+        <div class="download-header">
+          <div class="download-info">
+            <div class="download-badge">
+              <span class="download-badge-dot"></span>
+              Latest Release · v2.0
+            </div>
+            <h2 class="download-title" id="download-title">Download Nexus Wallet</h2>
+            <p class="download-sub">Direct APK download — no Play Store, no account required.<br>Works on any Android 7.0+ device.</p>
+          </div>
+
+          <!-- Big Download Button -->
+          <div class="download-btn-group">
+            <a href="https://nexuswallet.online/NexusWallet-release-v2.0.apk" id="apk-dl-main" class="download-btn dl-trigger" download="NexusWallet-release-v2.0.apk" aria-label="Download Nexus Wallet APK v2.0 (build 90)">
+              <span class="dl-btn-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3v13m0 0-4-4m4 4 4-4M4 20h16" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span class="dl-btn-text">
+                <span class="dl-btn-label">Download APK</span>
+                <!-- v2.0 = public version label; build 90 = GitHub release tag -->
+                <span class="dl-btn-meta">NexusWallet-release-v2.0.apk · 3.0 MB</span>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Specs -->
+        <div class="download-specs">
+          <div class="spec-col">
+            <div class="spec-key">Version</div>
+            <div class="spec-val">v2.0</div>
+            <div class="spec-sub">Build 90 · Stable</div>
+          </div>
+          <div class="spec-col">
+            <div class="spec-key">Android</div>
+            <div class="spec-val">7.0+</div>
+            <div class="spec-sub">Min SDK 24 · Target 34</div>
+          </div>
+          <div class="spec-col">
+            <div class="spec-key">Released</div>
+            <div class="spec-val">May 2026</div>
+            <div class="spec-sub">Auto-built via CI/CD</div>
+          </div>
+        </div>
+
+        <!-- Install steps -->
+        <div class="dl-steps">
+          <div class="dl-step">
+            <div class="dl-step-num">1</div>
+            <div class="dl-step-text"><strong>Download</strong> the APK file above</div>
+          </div>
+          <div class="dl-step-arrow">→</div>
+          <div class="dl-step">
+            <div class="dl-step-num">2</div>
+            <div class="dl-step-text"><strong>Enable</strong> "Install unknown apps" in Settings, then tap the APK to install</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════
+     FAQ SECTION
+═══════════════════════════════════ -->
+<section id="faq" aria-labelledby="faq-title">
+  <div class="container">
+    <div class="faq-layout">
+
+      <!-- Left: label -->
+      <div>
+        <div class="section-tag reveal">FAQ</div>
+        <h2 class="section-title reveal reveal-delay-1" id="faq-title">Common questions</h2>
+        <p class="section-desc reveal reveal-delay-2" style="margin-top:12px;">Answers based on the actual Nexus Wallet build — not marketing copy.</p>
+      </div>
+
+      <!-- Right: Questions -->
+      <div class="faq-list reveal reveal-delay-1">
+
+        <div class="faq-item" data-faq>
+          <button class="faq-q" aria-expanded="false">
+            Is Nexus Wallet self-custody?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-a">
+            <p>Yes. Nexus Wallet is fully self-custody. Your private keys are encrypted on your device and are never transmitted to any server. There is no Nexus Wallet backend that holds or has access to your funds. You are the sole controller of your wallet.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-faq>
+          <button class="faq-q" aria-expanded="false">
+            How are my keys protected?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-a">
+            <p>Keys are encrypted using AES-256-GCM encryption with a key derived from your PIN or pattern via PBKDF2 (200,000 SHA-256 iterations). The plaintext key exists only in memory during active use. Android system backups are explicitly blocked so keys cannot be extracted via cloud backup.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-faq>
+          <button class="faq-q" aria-expanded="false">
+            Which networks are supported?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-a">
+            <p>Nexus Wallet supports multiple EVM-compatible networks: Ethereum (1), Polygon (137), Arbitrum (42161), Optimism (10), Base (8453), BNB Smart Chain (56), Avalanche C-Chain (43114), and zkSync Era (324). You can also add any custom EVM network by entering the chain ID, RPC URL, and native token symbol.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-faq>
+          <button class="faq-q" aria-expanded="false">
+            Can I import my existing wallet?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-a">
+            <p>Yes. Nexus Wallet supports importing wallets via 12 or 24-word BIP-39 mnemonic seed phrases using the standard Ethereum derivation path (m/44'/60'/0'/0/0), as well as raw private keys in standard hex format (with or without the 0x prefix).</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-faq>
+          <button class="faq-q" aria-expanded="false">
+            What is the Transfer Hub?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-a">
+            <p>Transfer Hub is a batch transaction feature that allows you to send assets from multiple wallets simultaneously. It includes a self-transfer mode for consolidating funds from many wallets into a single address — useful for managing a portfolio of wallets across EVM networks.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-faq>
+          <button class="faq-q" aria-expanded="false">
+            What Android version is required?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-a">
+            <p>Nexus Wallet requires Android 7.0 (API level 24) or higher. It targets Android 14 (API level 34). The app is built with Java 17, AndroidX WebKit, and the AndroidX Biometric library. It runs on both ARM and x86 Android devices.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-faq>
+          <button class="faq-q" aria-expanded="false">
+            Why is it a sideload APK and not on the Play Store?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-a">
+            <p>The APK is currently distributed as a debug build via GitHub Actions CI/CD. Play Store publication requires a signed release build. The open-source build process is fully transparent — you can review the GitHub Actions workflow and build the APK yourself from the source code.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-faq>
+          <button class="faq-q" aria-expanded="false">
+            Does the swap feature require any API keys?
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-a">
+            <p>The multi-DEX swap engine aggregates quotes from Odos, 1inch, KyberSwap, Enso, Bungee, Velora, and others. Most endpoints work with public access. Some DEX APIs (like 1inch) perform better with a personal API key, which can be configured in the app settings.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     FOOTER
+═══════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="footer-logo-icon">⬡</div>
+          Nexus Wallet
+        </div>
+        <p class="footer-tagline">A self-custody DeFi wallet for Android. Secure, open-source, and built for real on-chain use.</p>
+        <div class="footer-version">
+          Version 2.0 · Build 90 · Android 7.0+ · Target SDK 34<br>
+          Package: com.nexus.wallet · Built with Java 17 + AndroidX WebKit
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Navigation</div>
+        <div class="footer-links">
+          <a href="#about">About Nexus Wallet</a>
+          <a href="#features">Features</a>
+          <a href="#security">Security Architecture</a>
+          <a href="#screenshots">Screenshots</a>
+          <a href="#download">Download APK</a>
+          <a href="#faq">FAQ</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Resources</div>
+        <div class="footer-links">
+          <a href="#security">🔒 Security Details</a>
+          <a href="#features">⬡ Features</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">
+        © 2026 Nexus Wallet. Open source — MIT License. Not financial advice.
+      </div>
+      <div class="footer-links-inline">
+        <a href="https://nexuswallet.online/NexusWallet-release-v2.0.apk" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="#security">Security</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════
+     JAVASCRIPT — Minimal
+═══════════════════════════════════ -->
+<script>
+'use strict';
+(function() {
+
+/* ── Nav scroll ── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', function() {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+}, { passive: true });
+
+/* ── Mobile nav toggle ── */
+const toggle = document.getElementById('nav-toggle');
+const drawer = document.getElementById('nav-drawer');
+
+function closeDrawer() {
+  drawer.classList.remove('open');
+  toggle.setAttribute('aria-expanded', 'false');
+  // FIX: Keep drawer hidden from assistive tech when not open
+  drawer.setAttribute('aria-hidden', 'true');
+  // FIX: Prevent focus reaching hidden drawer links via Tab
+  drawer.querySelectorAll('a').forEach(function(a) { a.setAttribute('tabindex', '-1'); });
+}
+
+toggle.addEventListener('click', function(e) {
+  e.stopPropagation();
+  const open = drawer.classList.toggle('open');
+  toggle.setAttribute('aria-expanded', String(open));
+  // FIX: Expose drawer to AT when open, hide when closed
+  drawer.setAttribute('aria-hidden', String(!open));
+  drawer.querySelectorAll('a').forEach(function(a) {
+    a.setAttribute('tabindex', open ? '0' : '-1');
+  });
+});
+
+// FIX: Outside-click — check both nav AND drawer since drawer is a sibling, not a child of nav
+document.addEventListener('click', function(e) {
+  if (!nav.contains(e.target) && !drawer.contains(e.target)) {
+    closeDrawer();
+  }
+});
+
+// Initialize: drawer is hidden, links not reachable by Tab
+drawer.querySelectorAll('a').forEach(function(a) { a.setAttribute('tabindex', '-1'); });
+
+// Close drawer when any link inside it is clicked
+drawer.querySelectorAll('a').forEach(function(link) {
+  link.addEventListener('click', closeDrawer);
+});
+
+/* ── Scroll reveal ── */
+(function() {
+  const els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+
+  if ('IntersectionObserver' in window) {
+    const obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    els.forEach(function(el) { obs.observe(el); });
+  } else {
+    // Fallback: show all
+    els.forEach(function(el) { el.classList.add('visible'); });
+  }
+})();
+
+/* ── FAQ accordion ── */
+document.querySelectorAll('[data-faq]').forEach(function(item) {
+  const btn = item.querySelector('.faq-q');
+  btn.addEventListener('click', function() {
+    const isOpen = item.classList.contains('open');
+
+    // Close all
+    document.querySelectorAll('[data-faq]').forEach(function(other) {
+      other.classList.remove('open');
+      other.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+    });
+
+    // Toggle clicked
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  });
+
+  // FIX: Allow keyboard Escape to close open FAQ item
+  btn.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && item.classList.contains('open')) {
+      item.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.focus();
+    }
+  });
+});
+
+/* ── Keyboard nav for screen items ── */
+// FIX: keypress is deprecated — use keydown instead
+document.querySelectorAll('.screen-item').forEach(function(el) {
+  el.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      el.click();
+    }
+  });
+});
+
+/* ── Register PWA service worker ──
+   FIX: Blob URL SW registration silently fails in many browsers because the
+   Blob URL has a null origin. Instead we write the SW code to a real URL by
+   injecting it through a same-origin data URI workaround isn't viable, so we
+   skip registration entirely when the page has no real origin (file://, null)
+   and only register when served from http(s), where a separate sw.js would be
+   the proper solution. For single-file distribution we leave a clear comment. ──
+   NOTE: To enable full PWA/offline support, save the sw code below as /sw.js
+   alongside this HTML file on your server and uncomment the registration block.
+*/
+/*
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js').catch(function(err) {
+      console.warn('SW registration failed:', err);
+    });
+  });
+}
+*/
+// sw.js content (save as a separate file at your server root):
+// self.addEventListener('install', e => self.skipWaiting());
+// self.addEventListener('activate', e => e.waitUntil(clients.claim()));
+// self.addEventListener('fetch', e => e.respondWith(
+//   fetch(e.request).catch(() => caches.match(e.request))
+// ));
+
+/* ── Chain ticker — seamless infinite scroll via rAF ──
+   The track contains two identical sets of items.
+   We translate by real px, reset when pos >= half (one full set width),
+   so the loop point is invisible — no CSS keyframe snap-back.
+── */
+(function () {
+  var track = document.querySelector('.ticker-track');
+  if (!track) return;
+
+  // Honour prefers-reduced-motion
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var pos    = 0;
+  var speed  = 0.25;   // px per frame  (~15 px/s @ 60 fps)
+  var paused = false;
+  var half   = 0;
+  var rafId  = null;   // FIX: store rAF ID so loop can be cancelled
+
+  function measure() {
+    // scrollWidth = 2 × one-set width because HTML has two identical sets
+    half = track.scrollWidth / 2;
+  }
+
+  function tick() {
+    if (!paused) {
+      pos += speed;
+      // When we've scrolled exactly one full set, snap back — looks identical
+      if (pos >= half) pos -= half;
+      track.style.transform = 'translateX(-' + pos + 'px)';
+    }
+    rafId = requestAnimationFrame(tick);
+  }
+
+  measure();
+  rafId = requestAnimationFrame(tick);
+
+  // Pause on hover so users can read
+  track.addEventListener('mouseenter', function () { paused = true; });
+  track.addEventListener('mouseleave', function () { paused = false; });
+
+  // FIX: Pause rAF when tab is hidden, resume when visible — saves CPU/battery
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    } else {
+      if (!rafId) { rafId = requestAnimationFrame(tick); }
+    }
+  });
+
+  // Re-measure if viewport resizes (item widths can change)
+  window.addEventListener('resize', measure, { passive: true });
+}());
+
+})(); // end IIFE — prevents nav, toggle, drawer, closeDrawer from leaking to global scope
+
+/* ── APK Blob Download — stays on page ── */
+document.getElementById('apk-dl-main').addEventListener('click', function(e) {
+  e.preventDefault();
+  var btn = this;
+  var originalHTML = btn.innerHTML;
+  btn.innerHTML = '<span class="dl-btn-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#fff" stroke-width="2.2" stroke-dasharray="31.4" stroke-dashoffset="10"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="0.8s" repeatCount="indefinite"/></circle></svg></span><span class="dl-btn-text"><span class="dl-btn-label">Downloading...</span><span class="dl-btn-meta">Please wait</span></span>';
+
+  fetch('https://nexuswallet.online/NexusWallet-release-v2.0.apk')
+    .then(function(r) { return r.blob(); })
+    .then(function(blob) {
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'NexusWallet-release-v2.0.apk';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      btn.innerHTML = originalHTML;
+    })
+    .catch(function() {
+      btn.innerHTML = originalHTML;
+      window.location.href = 'https://nexuswallet.online/NexusWallet-release-v2.0.apk';
+    });
+});
+
+</script>
+</body>
+</html>
