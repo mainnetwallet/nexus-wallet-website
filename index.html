@@ -2405,14 +2405,14 @@ footer {
 
           <!-- Big Download Button -->
           <div class="download-btn-group">
-            <a href="https://nexuswallet.online/NexusWallet-v2.0.apk" id="apk-dl-main" class="download-btn dl-trigger" download="NexusWallet-v2.0.apk" aria-label="Download Nexus Wallet APK v2.0 (build 90)">
+            <a href="https://nexuswallet.online/NexusWallet-release-v2.0.apk" id="apk-dl-main" class="download-btn dl-trigger" download="NexusWallet-release-v2.0.apk" aria-label="Download Nexus Wallet APK v2.0 (build 90)">
               <span class="dl-btn-icon">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3v13m0 0-4-4m4 4 4-4M4 20h16" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </span>
               <span class="dl-btn-text">
                 <span class="dl-btn-label">Download APK</span>
                 <!-- v2.0 = public version label; build 90 = GitHub release tag -->
-                <span class="dl-btn-meta">NexusWallet-v2.0.apk · 6.7 MB</span>
+                <span class="dl-btn-meta">NexusWallet-release-v2.0.apk · 3.0 MB</span>
               </span>
             </a>
           </div>
@@ -2607,7 +2607,7 @@ footer {
         © 2026 Nexus Wallet. Open source — MIT License. Not financial advice.
       </div>
       <div class="footer-links-inline">
-        <a href="https://nexuswallet.online/NexusWallet-v2.0.apk" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://nexuswallet.online/NexusWallet-release-v2.0.apk" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="#security">Security</a>
         <a href="#faq">FAQ</a>
       </div>
@@ -2817,13 +2817,13 @@ document.getElementById('apk-dl-main').addEventListener('click', function(e) {
   var originalHTML = btn.innerHTML;
   btn.innerHTML = '<span class="dl-btn-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#fff" stroke-width="2.2" stroke-dasharray="31.4" stroke-dashoffset="10"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="0.8s" repeatCount="indefinite"/></circle></svg></span><span class="dl-btn-text"><span class="dl-btn-label">Downloading...</span><span class="dl-btn-meta">Please wait</span></span>';
 
-  fetch('https://nexuswallet.online/NexusWallet-v2.0.apk')
+  fetch('https://nexuswallet.online/NexusWallet-release-v2.0.apk')
     .then(function(r) { return r.blob(); })
     .then(function(blob) {
       var url = URL.createObjectURL(blob);
       var a = document.createElement('a');
       a.href = url;
-      a.download = 'NexusWallet-v2.0.apk';
+      a.download = 'NexusWallet-release-v2.0.apk';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -2832,7 +2832,7 @@ document.getElementById('apk-dl-main').addEventListener('click', function(e) {
     })
     .catch(function() {
       btn.innerHTML = originalHTML;
-      window.location.href = 'https://nexuswallet.online/NexusWallet-v2.0.apk';
+      window.location.href = 'https://nexuswallet.online/NexusWallet-release-v2.0.apk';
     });
 });
 
